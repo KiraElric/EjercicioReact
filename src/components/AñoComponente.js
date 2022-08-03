@@ -1,34 +1,31 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-export const AñoComponente = ({ year }) => {
-  const [actualYear, setYear] = useState(year);
-  const nextYear = (e, actualYear) => {
-    let nextYear = actualYear + 1;
+export const AñoComponente = ({ actualYear }) => {
+  const [year, setYear] = useState(actualYear);
+  const nextYear = (e) => {
+    let nextYear = year + 1;
     setYear(nextYear);
   };
-  const lastYear = (e, actualYear) => {
-    let lastYear = actualYear - 1;
+  const lastYear = (e) => {
+    let lastYear = year - 1;
     setYear(lastYear);
   };
-  const changeYear = (e, newYear) => {
-    setYear(parseInt(newYear));
+  const changeYear = (e) => {
+    let newYear = parseInt(e.target.value);
+    setYear(newYear);
   };
   return (
     <div>
       <h2>Componente para el año</h2>
       <p>
-        Año actual: <strong>{actualYear}</strong>
+        Año actual: <strong>{year}</strong>
       </p>
       <hr />
-      <button onClick={(e) => nextYear(e, actualYear)}>Próximo año</button>
-      <button onClick={(e) => lastYear(e, actualYear)}>Año anterior</button>
+      <button onClick={lastYear}>Año anterior</button>
+      <button onClick={nextYear}>Próximo año</button>
       <hr />
-      <input
-        type="number"
-        onChange={(e) => changeYear(e, e.target.value)}
-        placeholder="Ingresa el año"
-      />
+      <input type="number" onChange={changeYear} placeholder="Ingresa el año" />
     </div>
   );
 };
